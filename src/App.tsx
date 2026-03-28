@@ -11,8 +11,7 @@ import { About } from "./components/About";
 import { Services } from "./components/Services";
 import { ARShowcase } from "./components/ARShowcase";
 import { Expertise } from "./components/Expertise";
-import { Process } from "./components/Process";
-import { Pricing } from "./components/Pricing";
+import { Collaboration } from "./components/Collaboration";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
@@ -28,8 +27,7 @@ export default function App() {
         <Services />
         <ARShowcase />
         <Expertise />
-        <Process />
-        <Pricing />
+        <Collaboration />
         <Contact />
       </main>
       <Footer />

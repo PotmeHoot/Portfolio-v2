@@ -1,13 +1,18 @@
 import { motion, useReducedMotion } from "motion/react";
-import { PROJECTS } from "../data/projects";
+import { projects } from "../data/projects";
 import { CLIENTS } from "../data/clients";
 import { FADE_UP_VARIANTS, DEFAULT_TRANSITION } from "../constants/motion";
 import { ProjectCard } from "./portfolio/ProjectCard";
 import { SectionHeader } from "./ui/SectionHeader";
 import { SectionWrapper } from "./ui/SectionWrapper";
+import { copy } from "../data/copy";
 
 export const Portfolio = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { common } = copy;
+
+  // Filter out hidden projects
+  const visibleProjects = projects.filter(p => p.status !== 'hidden');
 
   return (
     <SectionWrapper id="work" className="bg-[#080808]">
@@ -25,7 +30,7 @@ export const Portfolio = () => {
         <div className="max-w-2xl">
           <SectionHeader 
             eyebrow="Portfolio"
-            title="Selected Work"
+            title={common.viewWork}
             description="A curated collection of high-performance content designed to scale modern brands and drive real results."
             className="!mb-0"
           />
@@ -44,8 +49,8 @@ export const Portfolio = () => {
 
       {/* Portfolio Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-        {PROJECTS.map((item, i) => (
-          <ProjectCard key={i} item={item} index={i} />
+        {visibleProjects.map((item, i) => (
+          <ProjectCard key={item.id} item={item} index={i} />
         ))}
       </div>
     </SectionWrapper>

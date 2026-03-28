@@ -2,9 +2,12 @@ import { motion, useReducedMotion } from "motion/react";
 import { FADE_UP_VARIANTS, DEFAULT_TRANSITION } from "../constants/motion";
 import { SectionHeader } from "./ui/SectionHeader";
 import { SectionWrapper } from "./ui/SectionWrapper";
+import { copy } from "../data/copy";
+import { CLIENTS } from "../data/clients";
 
 export const About = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { about } = copy;
 
   return (
     <SectionWrapper id="about" className="bg-black" containerClassName="max-w-5xl">
@@ -18,22 +21,43 @@ export const About = () => {
         transition={DEFAULT_TRANSITION}
       >
         <SectionHeader 
-          eyebrow="Personal Story"
+          eyebrow="About Me"
           className="!mb-12"
         />
         
         <div className="space-y-10 md:space-y-16">
           <p className="text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.2] tracking-tight text-white/90">
-            I’m a graphic designer with over <span className="text-white">10 years of experience</span>, working across gaming, advertising and social media.
+            {about.title}
           </p>
           
           <p className="text-xl md:text-3xl font-medium leading-[1.4] text-text-secondary max-w-4xl">
-            I’ve worked in agencies and production environments, creating content for brands in <span className="text-white/80">healthcare, banking, and technology.</span>
+            {about.description}
           </p>
           
-          <p className="text-xl md:text-3xl font-medium leading-[1.4] text-text-secondary max-w-4xl">
-            Today, I focus on creating social media content that is both <span className="text-white/80 font-bold">visually strong and effective.</span>
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 pt-12 border-t border-white/10">
+            <div className="lg:col-span-2 space-y-8">
+              <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/20">Selected Brands</h4>
+              <div className="flex flex-wrap gap-x-12 gap-y-6">
+                {CLIENTS.map((client) => (
+                  <span key={client} className="text-xl md:text-2xl font-bold text-white/40 hover:text-white transition-colors cursor-default">
+                    {client}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-8">
+              <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/20">Expertise</h4>
+              <div className="space-y-4">
+                {about.expertise.map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-4">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    <span className="text-lg font-medium text-white/80">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </motion.div>
     </SectionWrapper>

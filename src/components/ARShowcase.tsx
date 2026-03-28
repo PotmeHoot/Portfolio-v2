@@ -1,15 +1,20 @@
 import { motion, useReducedMotion } from "motion/react";
-import { Sparkles, Instagram, Video, QrCode } from "lucide-react";
-import { AR_FILTERS } from "../data/arFilters";
+import { Sparkles, Instagram, Video, QrCode, ExternalLink } from "lucide-react";
+import { arFilters } from "../data/arFilters";
 import { FADE_UP_VARIANTS, SCALE_VARIANTS, DEFAULT_TRANSITION } from "../constants/motion";
 import { PillLabel } from "./ui/PillLabel";
 import { SafeImage } from "./ui/SafeImage";
+import { copy } from "../data/copy";
 
 export const ARShowcase = () => {
   const shouldReduceMotion = useReducedMotion();
+  const { common } = copy;
+
+  // Filter out hidden filters
+  const visibleFilters = arFilters.filter(f => f.status !== 'hidden');
 
   return (
-    <section id="ar-filters" className="section-padding px-6 relative overflow-hidden bg-gradient-to-b from-[#080808] to-black">
+    <section id="ar" className="section-padding px-6 relative overflow-hidden bg-gradient-to-b from-[#080808] to-black">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square bg-purple-500/5 rounded-full blur-[120px] -z-10" />
       
@@ -48,10 +53,10 @@ export const ARShowcase = () => {
             transition={DEFAULT_TRANSITION}
             className="grid grid-cols-2 gap-4"
           >
-            {AR_FILTERS.map((filter, i) => (
-              <div key={i} className="relative aspect-[2/3] card-base card-hover group">
+            {visibleFilters.map((filter, i) => (
+              <div key={filter.id} className="relative aspect-[2/3] card-base card-hover group">
                 <SafeImage 
-                  src={filter.img} 
+                  src={filter.previewImage || ""} 
                   alt={`${filter.title} AR filter for ${filter.platform}`} 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
                   loading="lazy"
@@ -61,11 +66,27 @@ export const ARShowcase = () => {
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="text-[8px] uppercase tracking-widest font-bold text-white/40 mb-1">{filter.platform}</div>
                   <div className="text-sm font-bold">{filter.title}</div>
+                  {filter.status === 'coming_soon' && (
+                    <div className="text-[8px] uppercase tracking-widest font-bold text-blue-400 mt-1">{common.comingSoon}</div>
+                  )}
                 </div>
-                {/* QR Code Overlay Placeholder */}
-                <div className="absolute top-4 right-4 w-10 h-10 glass rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <QrCode className="w-5 h-5 text-white/60" />
-                </div>
+                
+                {filter.link && (
+                  <a 
+                    href={filter.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="absolute top-4 right-4 w-10 h-10 glass rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  >
+                    <ExternalLink className="w-5 h-5 text-white/60" />
+                  </a>
+                )}
+                
+                {filter.qrCode && (
+                  <div className="absolute top-4 right-4 w-10 h-10 glass rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <QrCode className="w-5 h-5 text-white/60" />
+                  </div>
+                )}
               </div>
             ))}
           </motion.div>

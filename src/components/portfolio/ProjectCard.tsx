@@ -143,11 +143,7 @@ export const ProjectCard = memo(({ item, index }: ProjectCardProps) => {
 
         {/* Layer 5: Text/Meta Overlay Layer */}
         <ProjectMetaOverlay
-          category={item.category}
-          title={item.title}
-          description={item.description}
-          icon={item.icon}
-          type={item.type}
+          item={item}
         />
       </div>
     </motion.article>

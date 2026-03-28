@@ -1,17 +1,19 @@
-import { NAVIGATION_LINKS, OBSERVER_SECTIONS } from "../data/navigation";
+import { navigation } from "../data/navigation";
 import { Button } from "./ui/Button";
 import { useActiveSection } from "../hooks/useActiveSection";
+import { copy } from "../data/copy";
 
 export const Navbar = () => {
-  const activeSection = useActiveSection(OBSERVER_SECTIONS);
+  const activeSection = useActiveSection(navigation.map(n => n.id));
+  const { common } = copy;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-6 pointer-events-none">
       <nav className="bg-black/40 backdrop-blur-md border border-white/5 px-4 py-2 rounded-full flex items-center gap-6 md:gap-10 pointer-events-auto shadow-2xl" aria-label="Main navigation">
-        <div className="text-sm font-bold tracking-widest text-white/90">JURAJ ŽÁČEK</div>
+        <div className="text-sm font-bold tracking-widest text-white/90 uppercase">{common.name}</div>
         
-        <div className="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.2em] font-bold text-white/40">
-          {NAVIGATION_LINKS.map((link) => (
+        <div className="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-[0.2em] font-bold text-white/40">
+          {navigation.map((link) => (
             <a 
               key={link.id}
               href={`#${link.id}`} 

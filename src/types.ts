@@ -38,27 +38,43 @@ export interface ProcessStep {
   desc: string;
 }
 
-export type ProjectType = 'graphic' | 'video' | 'motion' | 'AR';
+export type ProjectStatus = 'ready' | 'coming_soon' | 'hidden';
+export type MediaType = 'image' | 'video' | 'mixed';
+export type ProjectType = 'social' | 'motion' | 'AR' | 'AI' | 'campaign' | string;
 
 export interface Project {
+  id: string;
   title: string;
+  client: string;
+  agency?: string;
   category: string;
+  type: string;
+  shortDescription: string;
+  deliverables: string[];
+  mediaType: MediaType;
   poster?: string;
-  description: string;
-  link?: string;
-  previewVideo?: string;
   previewImages?: string[];
-  icon?: IconName;
-  type?: ProjectType;
-  fallbackImage?: boolean;
-  fallbackVideo?: boolean;
+  previewVideo?: string;
+  platforms?: string[];
+  status: ProjectStatus;
+  year?: string;
 }
 
 export interface ARFilter {
-  platform: string;
+  id: string;
   title: string;
-  img: string;
+  platform: 'Instagram' | 'TikTok' | 'Snapchat';
+  previewImage?: string;
   qrCode?: string;
+  link?: string;
+  status: ProjectStatus;
+}
+
+export interface CollaborationStep {
+  id: string;
+  title: string;
+  description: string;
+  icon: IconName;
 }
 
 export interface HeroAssets {
