@@ -13,6 +13,7 @@ interface ProjectMediaFrameProps {
 
 export const ProjectMediaFrame = ({ poster, title, isIdle, isActive, type }: ProjectMediaFrameProps) => {
   const isVideoType = type === 'video' || type === 'motion' || type === 'AR';
+  const fallback = isVideoType ? <VideoPlaceholder /> : <ImagePlaceholder />;
 
   return (
     <motion.div
@@ -30,12 +31,9 @@ export const ProjectMediaFrame = ({ poster, title, isIdle, isActive, type }: Pro
           alt={title}
           className="w-full h-full object-cover grayscale-[0.6] group-hover:grayscale-0 transition-all duration-700"
           containerClassName="w-full h-full"
+          errorFallback={fallback}
         />
-      ) : isVideoType ? (
-        <VideoPlaceholder />
-      ) : (
-        <ImagePlaceholder />
-      )}
+      ) : fallback}
     </motion.div>
   );
 };

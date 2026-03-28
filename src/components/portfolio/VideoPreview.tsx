@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { RefObject } from "react";
+import { RefObject, useState } from "react";
+import { VideoPlaceholder } from "./ProjectPlaceholders";
 
 interface VideoPreviewProps {
   src: string;
@@ -16,6 +17,17 @@ export const VideoPreview = ({
   onError,
   videoRef,
 }: VideoPreviewProps) => {
+  const [hasError, setHasError] = useState(false);
+
+  const handleError = () => {
+    setHasError(true);
+    onError();
+  };
+
+  if (hasError) {
+    return <VideoPlaceholder className={isVisible ? "opacity-100" : "opacity-0"} />;
+  }
+
   return (
     <motion.video
       ref={videoRef}
@@ -25,7 +37,7 @@ export const VideoPreview = ({
       playsInline
       preload="auto"
       onLoadedMetadata={onLoadedMetadata}
-      onError={onError}
+      onError={handleError}
       initial={{ opacity: 0, filter: "blur(0px)" }}
       animate={{
         opacity: isVisible ? 1 : 0,

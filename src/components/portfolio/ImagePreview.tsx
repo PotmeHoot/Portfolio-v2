@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { SafeImage } from "../ui/SafeImage";
+import { ImagePlaceholder } from "./ProjectPlaceholders";
 
 interface ImagePreviewProps {
   images: string[];
@@ -49,6 +50,7 @@ export const ImagePreview = ({
             className="w-full h-full object-cover"
             loading={idx === 0 ? "eager" : "lazy"}
             containerClassName="w-full h-full"
+            errorFallback={<ImagePlaceholder />}
           />
         </motion.div>
       ))}

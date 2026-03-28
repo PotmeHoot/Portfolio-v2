@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import { cn } from "../../lib/utils";
 import { Image as ImageIcon } from "lucide-react";
 
@@ -7,6 +7,7 @@ interface SafeImageProps {
   alt: string;
   className?: string;
   fallbackSrc?: string;
+  errorFallback?: ReactNode;
   containerClassName?: string;
   loading?: "lazy" | "eager";
   [key: string]: any; // Allow other standard props
@@ -17,6 +18,7 @@ export const SafeImage = ({
   alt, 
   className, 
   fallbackSrc, 
+  errorFallback,
   containerClassName,
   ...props 
 }: SafeImageProps) => {
@@ -32,11 +34,17 @@ export const SafeImage = ({
       
       {/* Error State: Clean Internal Placeholder UI */}
       {error && !fallbackSrc && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white/[0.02] z-0">
-          <div className="flex flex-col items-center gap-2 opacity-20">
-            <ImageIcon className="w-5 h-5 text-white" strokeWidth={1.5} />
-            <span className="text-[8px] uppercase tracking-[0.3em] font-bold text-white">Missing Asset</span>
-          </div>
+        <div className="absolute inset-0 z-0">
+          {errorFallback ? (
+            errorFallback
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/[0.02]">
+              <div className="flex flex-col items-center gap-2 opacity-20">
+                <ImageIcon className="w-5 h-5 text-white" strokeWidth={1.5} />
+                <span className="text-[8px] uppercase tracking-[0.3em] font-bold text-white">Missing Asset</span>
+              </div>
+            </div>
+          )}
         </div>
       )}
       

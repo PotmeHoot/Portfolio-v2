@@ -24,6 +24,16 @@ export const ImagePlaceholder = ({ className }: PlaceholderProps) => {
         className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,1),transparent_70%)]" 
       />
       
+      {/* Visual Suggestion: Social Media Layout Grid */}
+      <div className="absolute inset-0 p-8 flex flex-col gap-4 opacity-[0.03]">
+        <div className="w-1/3 h-4 bg-white rounded-full" />
+        <div className="flex-1 border-2 border-dashed border-white rounded-3xl" />
+        <div className="flex gap-4">
+          <div className="w-12 h-12 rounded-full bg-white" />
+          <div className="flex-1 h-12 bg-white rounded-xl" />
+        </div>
+      </div>
+
       {/* Light Sweep Effect */}
       <motion.div
         animate={{ x: ["-100%", "200%"] }}
@@ -62,7 +72,7 @@ export const ImagePlaceholder = ({ className }: PlaceholderProps) => {
           </motion.div>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/10">Preview</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/10">Graphic Work</span>
           <div className="w-4 h-px bg-white/5" />
         </div>
       </motion.div>
@@ -88,6 +98,26 @@ export const VideoPlaceholder = ({ className }: PlaceholderProps) => {
         }}
         className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_80%)]" 
       />
+
+      {/* Visual Suggestion: Video Timeline */}
+      <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col gap-2 opacity-[0.05]">
+        <div className="flex justify-between text-[8px] font-mono text-white">
+          <span>00:00:00</span>
+          <span>00:00:15</span>
+        </div>
+        <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
+          <motion.div 
+            animate={{ width: ["0%", "100%"] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            className="h-full bg-white"
+          />
+        </div>
+        <div className="flex gap-1">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="flex-1 h-4 bg-white/10 rounded-sm" />
+          ))}
+        </div>
+      </div>
 
       {/* Light Sweep Effect */}
       <motion.div
@@ -126,7 +156,7 @@ export const VideoPlaceholder = ({ className }: PlaceholderProps) => {
           </motion.div>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-[11px] font-bold uppercase tracking-[0.6em] text-white/10">Video</span>
+          <span className="text-[11px] font-bold uppercase tracking-[0.6em] text-white/10">Motion Work</span>
           <div className="w-8 h-px bg-white/5" />
         </div>
       </motion.div>

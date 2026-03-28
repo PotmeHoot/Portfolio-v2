@@ -2,12 +2,11 @@ import { Project } from "../types";
 
 /**
  * Real portfolio anchors:
- * - Biedronka — social content via MAYER/McCANN
- * - Google — educational or campaign graphics
- * - Hartmann / MoliCare — social media campaign visuals
- * - Raiffeisen Bank — campaign visuals / banners
- * - TV Markíza — motion / video / social content
- * - AR Filters — Instagram and TikTok work
+ * 1. Biedronka — static social media graphics
+ * 2. Google — static campaign / educational graphics
+ * 3. Hartmann / MoliCare — static social campaign graphics
+ * 4. TV Markíza — video / motion content
+ * 5. AI-Assisted Visual Production — video / motion content
  */
 
 export const projects: Project[] = [
@@ -23,7 +22,13 @@ export const projects: Project[] = [
     mediaType: "image",
     status: "ready",
     year: "2024-2025",
-    platforms: ["Instagram", "Facebook"]
+    platforms: ["Instagram", "Facebook"],
+    poster: "/assets/work/biedronka/poster.jpg",
+    previewImages: [
+      "/assets/work/biedronka/preview-01.jpg",
+      "/assets/work/biedronka/preview-02.jpg",
+      "/assets/work/biedronka/preview-03.jpg"
+    ]
   },
   {
     id: "google-educational",
@@ -36,7 +41,12 @@ export const projects: Project[] = [
     mediaType: "image",
     status: "ready",
     year: "2023",
-    platforms: ["Web", "Internal"]
+    platforms: ["Web", "Internal"],
+    poster: "/assets/work/google/poster.jpg",
+    previewImages: [
+      "/assets/work/google/preview-01.jpg",
+      "/assets/work/google/preview-02.jpg"
+    ]
   },
   {
     id: "molicare-social",
@@ -46,23 +56,16 @@ export const projects: Project[] = [
     type: "Visual Production",
     shortDescription: "Comprehensive social media campaign visuals for healthcare and hygiene products.",
     deliverables: ["Social Media Visuals", "Key Visuals", "Campaign Strategy"],
-    mediaType: "mixed",
-    status: "ready",
-    year: "2024",
-    platforms: ["Instagram", "Facebook", "LinkedIn"]
-  },
-  {
-    id: "raiffeisen-bank-visuals",
-    title: "Raiffeisen Bank Campaign Visuals",
-    client: "Raiffeisen Bank",
-    category: "Banking & Finance",
-    type: "Campaign Visuals",
-    shortDescription: "Digital campaign visuals and banners for banking services and seasonal promotions.",
-    deliverables: ["Digital Banners", "Campaign Visuals", "Social Media Assets"],
     mediaType: "image",
     status: "ready",
-    year: "2023",
-    platforms: ["Web", "Social Media"]
+    year: "2024",
+    platforms: ["Instagram", "Facebook", "LinkedIn"],
+    poster: "/assets/work/molicare/poster.jpg",
+    previewImages: [
+      "/assets/work/molicare/preview-01.jpg",
+      "/assets/work/molicare/preview-02.jpg",
+      "/assets/work/molicare/preview-03.jpg"
+    ]
   },
   {
     id: "tv-markiza-motion",
@@ -75,18 +78,22 @@ export const projects: Project[] = [
     mediaType: "video",
     status: "ready",
     year: "2024",
-    platforms: ["TV", "Instagram", "TikTok"]
+    platforms: ["TV", "Instagram", "TikTok"],
+    poster: "/assets/work/markiza/poster.jpg",
+    previewVideo: "/assets/work/markiza/preview.mp4"
   },
   {
     id: "ai-visual-production",
     title: "AI-Assisted Visual Production",
     client: "Personal / R&D",
     category: "AI Visuals",
-    type: "Experimental",
-    shortDescription: "Exploring the intersection of AI-assisted imagery and commercial graphic design.",
+    type: "Video & Motion",
+    shortDescription: "Exploring the intersection of AI-assisted imagery and commercial motion design.",
     deliverables: ["AI Imagery", "Concept Art", "Production Workflows"],
-    mediaType: "mixed",
-    status: "coming_soon",
-    year: "2025"
+    mediaType: "video",
+    status: "ready",
+    year: "2025",
+    poster: "/assets/work/motion/poster.jpg",
+    previewVideo: "/assets/work/motion/preview.mp4"
   }
 ];
