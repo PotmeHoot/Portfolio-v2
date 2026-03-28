@@ -34,46 +34,18 @@ export const Showreel = () => {
 
   return (
     <SectionWrapper id="showreel" className="bg-bg-secondary/50">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
-        {/* Text Content */}
+      <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        {/* Video Container - Dominant on Desktop, First on Mobile */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="section-eyebrow">
-            <div className="section-eyebrow-line" />
-            {showreel.eyebrow}
-          </div>
-          <h2 className="section-title text-white">
-            {showreel.title}
-          </h2>
-          <p className="section-description mb-12">
-            {showreel.description}
-          </p>
-
-          <div className="grid grid-cols-2 gap-4">
-            {showreel.highlights.map((highlight, idx) => (
-              <div key={idx} className="flex items-center gap-3 text-text-secondary">
-                <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                <span className="text-sm font-medium">{highlight}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Video Container */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative aspect-video group"
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:col-span-8 relative aspect-video group"
         >
-          <div className="absolute -inset-4 bg-white/[0.02] rounded-[40px] blur-2xl -z-10 group-hover:bg-white/[0.04] transition-colors duration-700" />
+          <div className="absolute -inset-6 bg-white/[0.01] rounded-[48px] blur-3xl -z-10 group-hover:bg-white/[0.03] transition-colors duration-1000" />
           
-          <div className="relative w-full h-full rounded-[32px] overflow-hidden border border-white/10 bg-black shadow-2xl">
+          <div className="relative w-full h-full rounded-[24px] md:rounded-[40px] overflow-hidden border border-white/10 bg-black shadow-2xl">
             {videoError ? (
               <VideoPlaceholder />
             ) : (
@@ -91,19 +63,56 @@ export const Showreel = () => {
                 />
                 
                 {/* Subtle Overlay Info */}
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-2 group-hover:translate-y-0">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                        <Volume2 className="w-4 h-4 text-white/40" />
+                    <div className="flex items-center gap-5">
+                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10">
+                        <Volume2 className="w-5 h-5 text-white/60" />
                       </div>
-                      <span className="text-xs font-bold tracking-widest uppercase text-white/40">Motion Reel 2024</span>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40 mb-1">Motion Portfolio</span>
+                        <span className="text-sm font-bold text-white">Reel 2024 — Events & Large Format</span>
+                      </div>
                     </div>
-                    <Maximize2 className="w-4 h-4 text-white/40" />
+                    <Maximize2 className="w-5 h-5 text-white/40 hover:text-white transition-colors cursor-pointer" />
                   </div>
                 </div>
               </div>
             )}
+          </div>
+        </motion.div>
+
+        {/* Text Content - Supportive on Desktop, Below on Mobile */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="lg:col-span-4 flex flex-col justify-center"
+        >
+          <div className="section-eyebrow mb-6 lg:mb-8">
+            <div className="section-eyebrow-line" />
+            {showreel.eyebrow}
+          </div>
+          
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 lg:mb-8 tracking-tighter leading-[1.1]">
+            {showreel.title}
+          </h2>
+          
+          <p className="text-base md:text-lg text-text-secondary font-medium leading-relaxed mb-10 lg:mb-12 max-w-xl lg:max-w-none">
+            {showreel.description}
+          </p>
+
+          <div className="space-y-4 lg:space-y-5">
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/20 block mb-2">Key Areas</span>
+            <div className="flex flex-wrap lg:flex-col gap-3 lg:gap-4">
+              {showreel.highlights.map((highlight, idx) => (
+                <div key={idx} className="flex items-center gap-4 px-4 py-2 lg:px-0 lg:py-0 rounded-full bg-white/[0.03] lg:bg-transparent border border-white/5 lg:border-none">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                  <span className="text-xs md:text-sm font-semibold text-text-secondary tracking-wide">{highlight}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
