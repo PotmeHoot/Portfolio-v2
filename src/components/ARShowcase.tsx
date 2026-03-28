@@ -6,6 +6,8 @@ import { PillLabel } from "./ui/PillLabel";
 import { SafeImage } from "./ui/SafeImage";
 import { copy } from "../data/copy";
 
+import { SectionWrapper } from "./ui/SectionWrapper";
+
 export const ARShowcase = () => {
   const shouldReduceMotion = useReducedMotion();
   const { common } = copy;
@@ -14,12 +16,11 @@ export const ARShowcase = () => {
   const visibleFilters = arFilters.filter(f => f.status !== 'hidden');
 
   return (
-    <section id="ar" className="section-padding px-6 relative overflow-hidden bg-gradient-to-b from-[#080808] to-black">
+    <SectionWrapper id="ar" className="bg-gradient-to-b from-[#080808] to-black" showGlow={false}>
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square bg-purple-500/5 rounded-full blur-[120px] -z-10" />
       
-      <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center mb-16 md:mb-20">
+      <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center mb-16 md:mb-20">
           <motion.div
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -105,7 +106,6 @@ export const ARShowcase = () => {
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
+      </SectionWrapper>
+    );
 };

@@ -7,6 +7,7 @@ import { ScrollProgress } from "./components/ScrollProgress";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { Portfolio } from "./components/Portfolio";
+import { Showreel } from "./components/Showreel";
 import { About } from "./components/About";
 import { Services } from "./components/Services";
 import { ARShowcase } from "./components/ARShowcase";
@@ -23,6 +24,7 @@ export default function App() {
       <main>
         <Hero />
         <Portfolio />
+        <Showreel />
         <About />
         <Services />
         <ARShowcase />

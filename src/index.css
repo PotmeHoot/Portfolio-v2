@@ -113,7 +113,7 @@
 }
 
 @utility section-padding {
-  @apply py-20 md:py-40;
+  @apply py-32 md:py-64;
 }
 
 @utility section-eyebrow {

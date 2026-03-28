@@ -14,11 +14,5 @@ export const arFilters: ARFilter[] = [
     platform: "TikTok",
     status: "ready",
     link: "https://www.tiktok.com/..."
-  },
-  {
-    id: "ar-filter-coming-soon",
-    title: "New Interactive Experience",
-    platform: "Instagram",
-    status: "coming_soon"
   }
 ];

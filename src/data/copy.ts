@@ -19,6 +19,19 @@ export const copy = {
     year: "Year",
     email: "jurajzacek13@gmail.com",
   },
+  showreel: {
+    eyebrow: "Motion & Events Showreel",
+    title: "Large-format motion design for global events.",
+    description: "I specialize in creating high-impact visual content for large-scale conferences, stage screens, and immersive event environments. My experience includes on-site visual adaptation and designing for complex screen layouts that command attention in live production settings.",
+    highlights: [
+      "Conference Visuals",
+      "Stage Screens",
+      "Event Motion Design",
+      "Large-format Content",
+      "On-site Adaptation"
+    ],
+    cta: "Watch showreel"
+  },
   hero: {
     eyebrow: "Senior Graphic Designer & Content Specialist",
     title: "High-performance content for global brands.",
