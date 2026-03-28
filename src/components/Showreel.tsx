@@ -1,19 +1,36 @@
-import { motion } from "motion/react";
-import { Play, Maximize2, Volume2 } from "lucide-react";
+import { motion, useInView } from "motion/react";
+import { Maximize2, Volume2 } from "lucide-react";
 import { SectionWrapper } from "./ui/SectionWrapper";
 import { copy } from "../data/copy";
 import { SafeImage } from "./ui/SafeImage";
 import { VideoPlaceholder } from "./portfolio/ProjectPlaceholders";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export const Showreel = () => {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isInView = useInView(videoRef, { amount: 0.5 });
   const [videoError, setVideoError] = useState(false);
   const { showreel } = copy;
 
   // Placeholder poster and video paths
   const posterPath = "/assets/showreel/poster.jpg";
   const videoPath = "/assets/showreel/reel.mp4";
+
+  useEffect(() => {
+    if (!videoRef.current || videoError) return;
+
+    if (isInView) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay was prevented
+          console.log("Autoplay prevented by browser");
+        });
+      }
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isInView, videoError]);
 
   return (
     <SectionWrapper id="showreel" className="bg-bg-secondary/50">
@@ -36,7 +53,7 @@ export const Showreel = () => {
             {showreel.description}
           </p>
 
-          <div className="grid grid-cols-2 gap-4 mb-12">
+          <div className="grid grid-cols-2 gap-4">
             {showreel.highlights.map((highlight, idx) => (
               <div key={idx} className="flex items-center gap-3 text-text-secondary">
                 <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
@@ -44,11 +61,6 @@ export const Showreel = () => {
               </div>
             ))}
           </div>
-
-          <button className="btn-secondary group">
-            <Play className="w-5 h-5 fill-white group-hover:scale-110 transition-transform" />
-            {showreel.cta}
-          </button>
         </motion.div>
 
         {/* Video Container */}
@@ -62,24 +74,24 @@ export const Showreel = () => {
           <div className="absolute -inset-4 bg-white/[0.02] rounded-[40px] blur-2xl -z-10 group-hover:bg-white/[0.04] transition-colors duration-700" />
           
           <div className="relative w-full h-full rounded-[32px] overflow-hidden border border-white/10 bg-black shadow-2xl">
-            {!isVideoPlaying ? (
-              <div className="relative w-full h-full cursor-pointer" onClick={() => setIsVideoPlaying(true)}>
-                <SafeImage
-                  src={posterPath}
-                  alt="Showreel Poster"
-                  className="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-80 transition-all duration-1000"
-                  errorFallback={<VideoPlaceholder />}
+            {videoError ? (
+              <VideoPlaceholder />
+            ) : (
+              <div className="relative w-full h-full">
+                <video
+                  ref={videoRef}
+                  src={videoPath}
+                  poster={posterPath}
+                  className="w-full h-full object-cover"
+                  muted
+                  playsInline
+                  loop
+                  autoPlay
+                  onError={() => setVideoError(true)}
                 />
                 
-                {/* Play Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                    <Play className="w-10 h-10 text-white fill-white" />
-                  </div>
-                </div>
-
-                {/* Bottom Info Bar */}
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+                {/* Subtle Overlay Info */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
@@ -90,20 +102,6 @@ export const Showreel = () => {
                     <Maximize2 className="w-4 h-4 text-white/40" />
                   </div>
                 </div>
-              </div>
-            ) : (
-              <div className="w-full h-full">
-                {videoError ? (
-                  <VideoPlaceholder />
-                ) : (
-                  <video
-                    src={videoPath}
-                    className="w-full h-full object-cover"
-                    controls
-                    autoPlay
-                    onError={() => setVideoError(true)}
-                  />
-                )}
               </div>
             )}
           </div>

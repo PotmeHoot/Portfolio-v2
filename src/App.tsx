@@ -23,8 +23,8 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <Portfolio />
         <Showreel />
+        <Portfolio />
         <About />
         <Services />
         <ARShowcase />

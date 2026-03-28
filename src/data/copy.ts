@@ -29,8 +29,7 @@ export const copy = {
       "Event Motion Design",
       "Large-format Content",
       "On-site Adaptation"
-    ],
-    cta: "Watch showreel"
+    ]
   },
   hero: {
     eyebrow: "Senior Graphic Designer & Content Specialist",
